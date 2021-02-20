@@ -1,9 +1,51 @@
-import React from 'react';
-import servicesData from './data/services.json';
-import accessibilitiesData from './data/accessibilities.json';
-import arrivalinfoData from './data/arrivalinfo.json';
+import React, { useState, useEffect } from 'react';
+//import servicesData from './data/services.json';
+//import accessibilitiesData from './data/accessibilities.json';
+//import arrivalinfoData from './data/arrivalinfo.json';
+
 
 const HotelInfo = () => {
+
+  const [arrivalinfoData, setArrivalinfoData] = useState([]) 
+  //arrivalinfoData is a state variable, setArrivalinfoDta is a function
+  const loadArrivalinfoData = async() => {
+    //Query the API gateway
+    const response = await fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/arrivalinfo', 
+    // { method:'POST', headers: {'Content-Type': 'application/json'},body:JSON.stringify({"action": "Tutorial:", "remark":"5:00 PM"})})
+    // .then(data => {console.log(data);});
+    { method: 'GET'});     
+    let jsonData = await response.json();
+    //Assign the reponse data to the state variable 
+    setArrivalinfoData(jsonData);      
+  };
+
+  useEffect( () => {
+  // Load the menu links data from the API Gateway
+    loadArrivalinfoData();
+  }, [] );
+
+  const [servicesData, setServicesData] = useState([]);
+  const loadServicesData = async()=> {
+  const resp = await fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/services');
+  let jsonData = await resp.json();
+  setServicesData(jsonData);  
+  };
+
+  useEffect( () => {
+    loadServicesData();
+  },[]);
+
+  const [accessibilitiesData, setAccessibilitiesData] = useState([]);
+  const loadAccessibilitiesData = async()=> {
+  const resp = await fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/accessibilities');
+  let jsonData = await resp.json();
+  setAccessibilitiesData(jsonData);  
+  };
+
+  useEffect( () => {
+    loadAccessibilitiesData();
+  },[]);
+
   return (
     <div className="scene" id="hotelinfo">
       <article className="heading">
@@ -24,7 +66,7 @@ const HotelInfo = () => {
           <p>Our services and amenities are designed to make your travel easy, your stay comfortable, and your experience one-of-a-kind.</p>
           <ul>
             {
-              servicesData.map( (service) => <li> {service.name} </li> )
+              servicesData.map( (service) => <li>{service.name} </li> )
             }            
           </ul>
         </section>
