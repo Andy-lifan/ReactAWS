@@ -8,20 +8,31 @@ const HotelInfo = () => {
 
   const [arrivalinfoData, setArrivalinfoData] = useState([]) 
   //arrivalinfoData is a state variable, setArrivalinfoDta is a function
-  const loadArrivalinfoData = async() => {
-    //Query the API gateway
-    const response = await fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/arrivalinfo', 
-    // { method:'POST', headers: {'Content-Type': 'application/json'},body:JSON.stringify({"action": "Tutorial:", "remark":"5:00 PM"})})
-    // .then(data => {console.log(data);});
-    { method: 'GET'});     
-    let jsonData = await response.json();
-    //Assign the reponse data to the state variable 
-    setArrivalinfoData(jsonData);      
-  };
+  // const loadArrivalinfoData = async() => {
+  //   //Query the API gateway
+  //   const response = await fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/arrivalinfo', 
+  //   // { method:'POST', headers: {'Content-Type': 'application/json'},body:JSON.stringify({"remark":"5:00 PM", "action": "Tutorial:"})})
+  //   // .then(data => {console.log(data);});
+  //   { method: 'GET'});     
+  //   let jsonData = await response.json();
+  //   //Assign the reponse data to the state variable 
+  //   setArrivalinfoData(jsonData);      
+  // };
 
   useEffect( () => {
   // Load the menu links data from the API Gateway
-    loadArrivalinfoData();
+  // loadArrivalinfoData();
+    
+  // POST request using fetch inside useEffect React hook
+  const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ remark:"5:00 PM", action: "Jogging" })
+      };
+      fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/arrivalinfo', requestOptions)
+          .then( response => response.json() )
+          .then( data => setArrivalinfoData({data}) );
+      
   }, [] );
 
   const [servicesData, setServicesData] = useState([]);

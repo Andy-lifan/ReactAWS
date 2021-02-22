@@ -5,6 +5,7 @@ import './App.css';
 import Header from './components/Header.js'
 import Footer from './components/Footer.js'
 import Main from './components/Main'
+import GetRequestHooks from './components/GetRequestHooks'
 
 class App extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class App extends React.Component {
     < Header />
     < Main/>   
     < Footer />
+    < GetRequestHooks />
     </div>
   );
  }
