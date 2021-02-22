@@ -5,6 +5,7 @@ import './App.css';
 import Header from './components/Header.js'
 import Footer from './components/Footer.js'
 import Main from './components/Main'
+import PoshRequestHooksb from './components/PoshRequestHooksb'
 
 class App extends React.Component {
   render() {
@@ -12,7 +13,10 @@ class App extends React.Component {
     <div className="App">
     < Header />
     < Main/>   
-    < Footer />    
+    < Footer /> 
+    <div className="Test">
+    <PoshRequestHooksb />
+    </div>   
     </div>
   );
  }
