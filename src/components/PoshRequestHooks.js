@@ -9,9 +9,9 @@ function PoshRequestHooks() {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ remark: "6:00 PM", action: "Jogging"})
+                body: JSON.stringify({ "remark": "6:00 PM", "action": "Jogging"})
             };
-            fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/arrivalinfopost', requestOptions)
+            fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/arrivalinfo', requestOptions)
                 .then(response => response.json())
                 .then(data => {setRemarkData(data.remark); setActionData(data.action)} );   
         
