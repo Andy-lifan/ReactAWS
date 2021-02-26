@@ -15,6 +15,7 @@ arrivalInfoData.forEach(function(e) {
   var params = {
     TableName: "Arrivalinfo",
     Item: {
+      "id": e.id,
       "action": e.action,
       "remark": e.remark
     }
@@ -23,8 +24,8 @@ arrivalInfoData.forEach(function(e) {
 dynamodb.put(params, function(err, data) {
     if (err)
       console.error("Unable to load data into table for Arrivalinfo",
-                    e.action, ". Error: ", JSON.stringify(err, null, 2))
+                    e.id, ". Error: ", JSON.stringify(err, null, 2))
     else
-      console.log("Added", e.action, "to table.")
+      console.log("Added", e.id, "to table.")
   })
 });

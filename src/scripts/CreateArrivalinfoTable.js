@@ -10,15 +10,28 @@ var params = {
   TableName: "Arrivalinfo",
   KeySchema: [
     // Partition Key
-    { AttributeName: "action", KeyType: "HASH" },
+    { AttributeName: "id", KeyType: "HASH" },
     // Sort Keys
     { AttributeName: "remark", KeyType: "RANGE"}  
   ],
   AttributeDefinitions: [
+    { AttributeName: "id", AttributeType: "S" },
     { AttributeName: "action", AttributeType: "S" },
     { AttributeName: "remark", AttributeType: "S" }   
   ],
-      
+  LocalSecondaryIndexes: [
+    {
+      IndexName: "ClassIndex",
+      KeySchema: [
+        { AttributeName: "id", KeyType: "HASH" },
+        { AttributeName: "action", KeyType: "RANGE" }
+      ],
+      Projection: {
+        ProjectionType: "KEYS_ONLY"
+      }
+    }
+  ],
+  
   ProvisionedThroughput: {
     ReadCapacityUnits: 10,
     WriteCapacityUnits: 10

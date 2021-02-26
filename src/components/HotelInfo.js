@@ -10,24 +10,17 @@ const HotelInfo = () => {
   //arrivalinfoData is a state variable, setArrivalinfoDta is a function
   const loadArrivalinfoData = async() => {
   //Query the API gateway
-  const response = await fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/arrivalinfo');     
+  const response = await fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/items');     
   let jsonData = await response.json();
+  let ItemData = jsonData.Items;
   //Assign the reponse data to the state variable 
-  setArrivalinfoData(jsonData);      
+  setArrivalinfoData(ItemData);      
   };
 
   useEffect( () => {
   // Load the menu links data from the API Gateway
-  loadArrivalinfoData();    
-  // POST request using fetch inside useEffect React hook
-  // const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ remark:"5:00 PM", action: "Jogging" })
-  //     };
-  //     fetch('https://n4b3cskro0.execute-api.us-east-2.amazonaws.com/production/arrivalinfo', requestOptions)
-  //         .then( response => response.json() )
-  //         .then( data => setArrivalinfoData({data}) );      
+  loadArrivalinfoData();  
+  
   }, [] );
 
   const [servicesData, setServicesData] = useState([]);
@@ -62,8 +55,7 @@ const HotelInfo = () => {
           <h2>Arrival Information</h2>
           <ul>
             {
-              arrivalinfoData.map( (arrival) => <li><strong>{arrival.action}</strong> {arrival.remark}</li> )
-                        
+            arrivalinfoData.map( (arrival) => <li><strong>{arrival.action}</strong> {arrival.remark}</li> )                        
             }            
           </ul>
         </section>
